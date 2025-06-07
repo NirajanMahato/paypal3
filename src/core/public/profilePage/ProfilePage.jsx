@@ -16,6 +16,12 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(true);
 
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn"); // remove login flag
+    sessionStorage.clear(); // optional: clear session data
+    navigate("/login"); // redirect to login
+  };
+
   const options = [
     {
       label: "Security",
@@ -107,7 +113,10 @@ const ProfilePage = () => {
       </div>
 
       {/* Logout */}
-      <button className="w-full flex items-center justify-center gap-3 mt-8 bg-red-500 text-gray-200 rounded-xl shadow-md py-3 font-semibold">
+      <button
+        onClick={handleLogout}
+        className="w-full flex items-center justify-center gap-3 mt-8 bg-red-500 text-gray-200 rounded-xl shadow-md py-3 font-semibold"
+      >
         <FiLogOut className="text-lg" />
         <h1>Log out</h1>
       </button>

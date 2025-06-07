@@ -22,6 +22,17 @@ export default function SendMoneyPage() {
     }, 2000);
   };
 
+  const formatAmount = (val) => {
+    const num = parseFloat(val);
+    return isNaN(num) ? "" : num.toFixed(2);
+  };
+
+  const handleBlur = () => {
+    if (amount) {
+      setAmount(formatAmount(amount));
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-2 pt-6">
       {/* Header */}
@@ -45,10 +56,12 @@ export default function SendMoneyPage() {
             type="text"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            onBlur={handleBlur}
             placeholder="0.00"
-            inputMode="decimal" // optional: on mobile shows number pad
+            inputMode="decimal"
             className="w-full bg-transparent outline-none text-center"
           />
+
           <span className="text-lg font-semibold text-gray-500 ml-2">EUR</span>
         </div>
       </div>

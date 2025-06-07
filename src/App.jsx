@@ -1,6 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import LoginPage from "./core/public/auth/LoginPage";
 import ConfirmTransferPage from "./core/public/homePage/ConfirmTransferPage";
 import HomePage from "./core/public/homePage/Home";
 import PayInStorePage from "./core/public/homePage/PayInStorePage";
@@ -14,6 +19,7 @@ import SecurityPage from "./core/public/profilePage/SecurityPage";
 import SendMoneyPage from "./core/public/sendPage/SendMoneyPage";
 import SendPage from "./core/public/sendPage/SendPage";
 import WalletPage from "./core/public/walletPage/WalletPage";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -32,74 +38,86 @@ function App() {
     return savedActivities ? JSON.parse(savedActivities) : [];
   });
 
+  const [loggedIn, setLoggedIn] = useState(() => {
+    return localStorage.getItem("loggedIn") === "true";
+  });
+
   useEffect(() => {
     const handleBeforeUnload = () => {
       sessionStorage.removeItem("balance");
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
-  return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider
-          router={createBrowserRouter([
-            {
-              path: "/",
-              element: (
-                <HomePage
-                  balance={balance}
-                  setBalance={setBalance}
-                  recentActivities={recentActivities}
-                  setRecentActivities={setRecentActivities}
-                />
-              ),
-            },
-            {
-              path: "pay-in-store",
-              element: <PayInStorePage balance={balance} />,
-            },
-            {
-              path: "/transfer-bank",
-              element: <TransferToBankPage balance={balance} />,
-            },
-            {
-              path: "/confirm-transfer",
-              element: <ConfirmTransferPage balance={balance} setBalance={setBalance} />,
-            },
-            { path: "/send", element: <SendPage /> },
-            { path: "/send-money", element: <SendMoneyPage /> },
-            { path: "/profile", element: <ProfilePage /> },
-            { path: "/profile/personal-info", element: <PersonalInfoPage /> },
-            { path: "/profile/security", element: <SecurityPage /> },
-            { path: "/profile/notifications", element: <NotificationsPage /> },
-            { path: "/profile/help-support", element: <HelpSupportPage /> },
-            {
-              path: "/payments",
-              element: (
-                <PaymentsPage
-                  balance={balance}
-                  recentActivities={recentActivities}
-                />
-              ),
-            },
-            {
-              path: "/wallet",
-              element: (
-                <WalletPage
-                  balance={balance}
-                  recentActivities={recentActivities}
-                />
-              ),
-            },
-          ])}
+  const ProtectedRoute = (element) =>
+    loggedIn ? element : <Navigate to="/login" replace />;
+
+  const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <LoginPage setLoggedIn={setLoggedIn} />,
+    },
+    {
+      path: "/",
+      element: ProtectedRoute(
+        <HomePage
+          balance={balance}
+          setBalance={setBalance}
+          recentActivities={recentActivities}
+          setRecentActivities={setRecentActivities}
         />
-      </QueryClientProvider>
-    </>
+      ),
+    },
+    {
+      path: "/pay-in-store",
+      element: ProtectedRoute(<PayInStorePage balance={balance} />),
+    },
+    {
+      path: "/transfer-bank",
+      element: ProtectedRoute(<TransferToBankPage balance={balance} />),
+    },
+    {
+      path: "/confirm-transfer",
+      element: ProtectedRoute(
+        <ConfirmTransferPage balance={balance} setBalance={setBalance} />
+      ),
+    },
+    { path: "/send", element: ProtectedRoute(<SendPage />) },
+    { path: "/send-money", element: ProtectedRoute(<SendMoneyPage />) },
+    { path: "/profile", element: ProtectedRoute(<ProfilePage />) },
+    {
+      path: "/profile/personal-info",
+      element: ProtectedRoute(<PersonalInfoPage />),
+    },
+    { path: "/profile/security", element: ProtectedRoute(<SecurityPage />) },
+    {
+      path: "/profile/notifications",
+      element: ProtectedRoute(<NotificationsPage />),
+    },
+    {
+      path: "/profile/help-support",
+      element: ProtectedRoute(<HelpSupportPage />),
+    },
+    {
+      path: "/payments",
+      element: ProtectedRoute(
+        <PaymentsPage balance={balance} recentActivities={recentActivities} />
+      ),
+    },
+    {
+      path: "/wallet",
+      element: ProtectedRoute(
+        <WalletPage balance={balance} recentActivities={recentActivities} />
+      ),
+    },
+  ]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+       <Toaster position="top-center" />
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 }
 
