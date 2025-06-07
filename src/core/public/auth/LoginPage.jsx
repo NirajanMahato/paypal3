@@ -13,18 +13,12 @@ export default function LoginPage({ setLoggedIn }) {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const enteredEmail = email.trim();
-    const enteredPassword = password.trim();
-
-    if (
-      enteredEmail === "hamzahabibi707@gmail.com" &&
-      enteredPassword === "1@abhi@"
-    ) {
+    if (email.trim() && password.trim()) {
       localStorage.setItem("loggedIn", "true");
       toast.success("Login successful!");
       navigate("/");
     } else {
-      toast.error("Invalid credentials");
+      toast.error("Please enter email and password");
     }
   };
 
