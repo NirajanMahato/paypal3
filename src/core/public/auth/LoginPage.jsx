@@ -17,7 +17,7 @@ export default function LoginPage({ setLoggedIn }) {
     const enteredPassword = password.trim();
 
     if (
-      enteredEmail === "Hamzahabibi707@gmail.com" &&
+      enteredEmail === "hamzahabibi707@gmail.com" &&
       enteredPassword === "1@abhi@"
     ) {
       localStorage.setItem("loggedIn", "true");

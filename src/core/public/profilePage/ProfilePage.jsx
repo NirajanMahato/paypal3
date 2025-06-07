@@ -67,7 +67,7 @@ const ProfilePage = () => {
         <div>
           <h1 className="text-xl font-semibold">Sulaiman Al Habib</h1>
           <p className="text-gray-400 font-semibold text-sm">
-            habibulaiman009@gmail.com
+            hamzahabibi707@gmail.com
           </p>
         </div>
       </div>

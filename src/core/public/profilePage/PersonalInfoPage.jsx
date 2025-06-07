@@ -26,7 +26,7 @@ const PersonalInfoPage = () => {
         <div>
           <p className="text-gray-500 text-md font-medium mb-1">Email</p>
           <p className="text-gray-900 text-xl font-semibold">
-            habibulaiman009@gmail.com
+            hamzahabibi707@gmail.com
           </p>
         </div>
         <div>
