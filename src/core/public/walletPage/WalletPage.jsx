@@ -3,6 +3,7 @@ import { FiCreditCard } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { LuArrowDownToLine, LuArrowUpFromLine } from "react-icons/lu";
 import BottomNav from "../components/BottomNav";
+import { Link } from "react-router-dom";
 
 const WalletPage = ({ balance, recentActivities }) => {
   const [tab, setTab] = useState("wallet");
@@ -63,10 +64,10 @@ const WalletPage = ({ balance, recentActivities }) => {
             <div className="flex justify-between items-center mt-4">
               <div className="text-gray-300">
                 <p>Expires</p>
-                <p>12/25</p>
+                <p>12/27</p>
               </div>
               <div className="text-sm text-gray-200 font-semibold">
-                JOHN DOE
+                AL HABIB
               </div>
             </div>
           </div>
@@ -80,13 +81,15 @@ const WalletPage = ({ balance, recentActivities }) => {
               </div>
               <IoIosArrowForward className="text-gray-800 text-lg" />
             </div>
-            <div className="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-4 py-3 cursor-pointer">
-              <div className="flex items-center gap-3">
-                <LuArrowUpFromLine className="text-xl text-gray-800" />
-                <p className="font-medium text-gray-800">Transfer to bank</p>
+            <Link to={"/transfer-bank"}>
+              <div className="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-4 py-3 cursor-pointer">
+                <div className="flex items-center gap-3">
+                  <LuArrowUpFromLine className="text-xl text-gray-800" />
+                  <p className="font-medium text-gray-800">Transfer to bank</p>
+                </div>
+                <IoIosArrowForward className="text-gray-800 text-lg" />
               </div>
-              <IoIosArrowForward className="text-gray-800 text-lg" />
-            </div>
+            </Link>
           </div>
 
           {/* Currencies */}

@@ -9,8 +9,8 @@ import { FiLogOut } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import image1 from "../../../../public/Logo/image1.jpg";
-import Switch from "../components/Switch";
 import BottomNav from "../components/BottomNav";
+import Switch from "../components/Switch";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const ProfilePage = () => {
     {
       label: "Payment methods",
       icon: <LucideCreditCard className="text-xl" />,
-      route: "/profile/payment-methods",
+      route: "/payments",
     },
     {
       label: "Notifications",
@@ -59,9 +59,9 @@ const ProfilePage = () => {
           className="w-16 h-16 bg-cover rounded-full shadow-md"
         />
         <div>
-          <h1 className="text-xl font-semibold">Shivam Yadav</h1>
+          <h1 className="text-xl font-semibold">Sulaiman Al Habib</h1>
           <p className="text-gray-400 font-semibold text-sm">
-            shivamyadav009@gmail.com
+            habibulaiman009@gmail.com
           </p>
         </div>
       </div>

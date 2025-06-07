@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import BottomNav from "../components/BottomNav";
 import Switch from "../components/Switch";
 
 const NotificationsPage = () => {
@@ -51,6 +52,7 @@ const NotificationsPage = () => {
       <button className="w-full bg-blue-600 text-white rounded-xl py-3 font-semibold">
         Update Preferences
       </button>
+      <BottomNav />
     </div>
   );
 };

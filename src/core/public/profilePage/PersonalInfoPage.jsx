@@ -1,5 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import BottomNav from "../components/BottomNav";
 
 const PersonalInfoPage = () => {
   const navigate = useNavigate();
@@ -19,32 +20,32 @@ const PersonalInfoPage = () => {
         <div>
           <p className="text-gray-500 text-md font-medium mb-1">Name</p>
           <p className="text-gray-900 text-xl font-semibold">
-            Shivam Yadav
+            Sulaiman Al Habib
           </p>
         </div>
         <div>
           <p className="text-gray-500 text-md font-medium mb-1">Email</p>
           <p className="text-gray-900 text-xl font-semibold">
-            shivamyadav009@gmail.com
+            habibulaiman009@gmail.com
           </p>
         </div>
         <div>
           <p className="text-gray-500 text-md font-medium mb-1">Phone</p>
           <p className="text-gray-900 text-xl font-semibold">
-            +977 9826734567
+            +971 57 432 6745
           </p>
         </div>
         <div>
           <p className="text-gray-500 text-md font-medium mb-1">Address</p>
           <p className="text-gray-900 text-xl font-semibold">
-            123 Palm Jumeirah, Dubai
+            123 Palm Jumeirah, Dubai, UAE
           </p>
         </div>
         <div>
           <p className="text-gray-500 text-md font-medium mb-1">
             Date of Birth
           </p>
-          <p className="text-gray-900 text-xl font-semibold">17 August 2004</p>
+          <p className="text-gray-900 text-xl font-semibold">17 August 1993</p>
         </div>
       </div>
 
@@ -52,6 +53,7 @@ const PersonalInfoPage = () => {
       <button className="w-full max-w-md bg-blue-600 text-white py-3 rounded-lg text-md font-semibold">
         Edit Personal Info
       </button>
+      <BottomNav />
     </div>
   );
 };
