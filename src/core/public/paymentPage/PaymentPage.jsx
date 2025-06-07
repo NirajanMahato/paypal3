@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { FaStore } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
+import { MdOutlineQrCode2 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { dummyUsers } from "../../../dummydata/user"; // Import your dummy data
 import BottomNav from "../components/BottomNav";
@@ -22,7 +24,7 @@ const PaymentsPage = ({ balance, recentActivities }) => {
 
       {/* Balance */}
       <div className="mb-6">
-        <p className="text-gray-500 text-sm mb-1">PayPal balance</p>
+        <p className="text-gray-600 text-md font-normal mb-1">PayPal balance</p>
         <p className="text-3xl font-bold">
           €
           {parseFloat(balance).toLocaleString(undefined, {
@@ -32,13 +34,13 @@ const PaymentsPage = ({ balance, recentActivities }) => {
       </div>
 
       {/* Tabs */}
-      <div className="flex mb-6 bg-gray-100 p-1 rounded-full">
+      <div className="flex mb-6 bg-gray-100 p-1 rounded-lg">
         {["Send", "Bills", "Request"].map((item) => (
           <button
             key={item}
             onClick={() => setTab(item)}
-            className={`flex-1 py-2 text-center rounded-full text-sm font-medium ${
-              tab === item ? "bg-white shadow text-blue-600" : "text-gray-500"
+            className={`flex-1 py-2 text-center rounded-lg text-sm font-medium ${
+              tab === item ? "bg-white text-black" : "text-gray-500"
             }`}
           >
             {item}
@@ -47,38 +49,31 @@ const PaymentsPage = ({ balance, recentActivities }) => {
       </div>
 
       {/* Search */}
-      <div className="flex items-center mb-6">
-        <input
-          type="text"
-          placeholder="Name, username or email"
-          className="flex-1 border border-gray-300 rounded-full px-4 py-2 mr-2"
-        />
-        <button className="border border-gray-300 p-3 rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path d="M10.442 10.442a1 1 0 0 1-1.415 0L7 8.414 4.973 10.44a1 1 0 1 1-1.415-1.414L5.586 7 3.56 4.973a1 1 0 0 1 1.414-1.415L7 5.586l2.027-2.028a1 1 0 1 1 1.415 1.415L8.414 7l2.028 2.027a1 1 0 0 1 0 1.415z" />
-          </svg>
+      <div className="flex items-center justify-between mb-6 w-full">
+        <div className="flex w-full items-center gap-2 border bg-white border-gray-300 rounded-lg px-4 py-2 mr-2">
+          <FiSearch className="text-gray-400"/>
+          <input type="text" placeholder="Name, username or email" />
+        </div>
+        <button className="border border-gray-300 p-2.5 bg-white rounded-lg">
+          <MdOutlineQrCode2 className="text-xl" />
         </button>
       </div>
 
       {/* Recent Contacts */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-md font-semibold">Recent contacts</h2>
+          <h2 className="text-lg font-semibold">Recent contacts</h2>
           <button className="text-blue-600 text-sm font-medium">See All</button>
         </div>
         <div className="flex overflow-x-auto gap-4">
           {dummyUsers.slice(0, 6).map((user) => (
             <div key={user.username} className="flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm font-bold mb-2">
+              <div className="w-[73px] h-[73px] rounded-full bg-blue-500 text-white flex items-center justify-center text-3xl  mb-2">
                 {user.username.slice(0, 2).toUpperCase()}
               </div>
-              <p className="text-xs text-center truncate w-16">{user.name}</p>
+              <p className="text-sm font-medium text-center truncate w-16">
+                {user.name}
+              </p>
             </div>
           ))}
         </div>
@@ -86,12 +81,12 @@ const PaymentsPage = ({ balance, recentActivities }) => {
 
       {/* Recent Transactions */}
       <div>
-        <h2 className="text-md font-semibold mb-4">Recent transactions</h2>
+        <h2 className="text-lg font-semibold mb-4">Recent transactions</h2>
         <div className="space-y-4">
           {recentActivities.map((activity) => (
             <div
               key={activity.id}
-              className="flex items-center justify-between bg-white rounded-xl shadow-sm p-4"
+              className="flex items-center justify-between bg-white rounded-xl shadow-xs p-4"
             >
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-600">

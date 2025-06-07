@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FiCreditCard } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { LuArrowDownToLine, LuArrowUpFromLine } from "react-icons/lu";
@@ -6,12 +6,6 @@ import BottomNav from "../components/BottomNav";
 
 const WalletPage = ({ balance, recentActivities }) => {
   const [tab, setTab] = useState("wallet");
-
-  useEffect(() => {
-    const savedActivities =
-      JSON.parse(localStorage.getItem("recentActivities")) || [];
-    setRecentActivities(savedActivities);
-  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 pt-6 mb-20 flex flex-col items-center">
@@ -27,10 +21,10 @@ const WalletPage = ({ balance, recentActivities }) => {
 
       {/* Tab Switcher */}
       <div className="flex justify-center w-full mb-6">
-        <div className="flex justify-between w-full bg-gray-100 rounded-lg p-1">
+        <div className="flex justify-between w-full bg-gray-100 rounded-lg p-1 max-w-md">
           <button
             onClick={() => setTab("wallet")}
-            className={`px-4 py-1.5 w-full rounded-lg text-sm font-semibold ${
+            className={`px-4 py-1.5 w-1/2 rounded-lg text-sm font-semibold ${
               tab === "wallet" ? "bg-white text-gray-900" : "text-gray-400"
             }`}
           >
@@ -38,7 +32,7 @@ const WalletPage = ({ balance, recentActivities }) => {
           </button>
           <button
             onClick={() => setTab("activity")}
-            className={`px-4 py-1.5 w-full rounded-lg text-sm font-semibold ${
+            className={`px-4 py-1.5 w-1/2 rounded-lg text-sm font-semibold ${
               tab === "activity" ? "bg-white text-gray-900" : "text-gray-400"
             }`}
           >
@@ -46,6 +40,8 @@ const WalletPage = ({ balance, recentActivities }) => {
           </button>
         </div>
       </div>
+
+      {/* Wallet Tab */}
       {tab === "wallet" && (
         <>
           {/* Wallet Card */}
@@ -68,8 +64,8 @@ const WalletPage = ({ balance, recentActivities }) => {
               <div className="text-gray-300">
                 <p>Expires</p>
                 <p>12/25</p>
-              </div>{" "}
-              <div className="flex justify-end text-sm text-gray-200 font-semibold mt-2">
+              </div>
+              <div className="text-sm text-gray-200 font-semibold">
                 JOHN DOE
               </div>
             </div>
@@ -77,17 +73,17 @@ const WalletPage = ({ balance, recentActivities }) => {
 
           {/* Options */}
           <div className="w-full max-w-md mb-6 space-y-4">
-            <div className="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-4 py-2 cursor-pointer">
+            <div className="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-4 py-3 cursor-pointer">
               <div className="flex items-center gap-3">
                 <LuArrowDownToLine className="text-xl text-gray-800" />
-                <p className="font-medium">Add money</p>
+                <p className="font-medium text-gray-800">Add money</p>
               </div>
               <IoIosArrowForward className="text-gray-800 text-lg" />
             </div>
-            <div className="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-4 py-2 cursor-pointer">
+            <div className="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-4 py-3 cursor-pointer">
               <div className="flex items-center gap-3">
                 <LuArrowUpFromLine className="text-xl text-gray-800" />
-                <p className="font-medium">Transfer to bank</p>
+                <p className="font-medium text-gray-800">Transfer to bank</p>
               </div>
               <IoIosArrowForward className="text-gray-800 text-lg" />
             </div>
@@ -119,7 +115,7 @@ const WalletPage = ({ balance, recentActivities }) => {
         </>
       )}
 
-      {/* Activity Section */}
+      {/* Activity Tab */}
       {tab === "activity" && (
         <div className="flex flex-col w-full max-w-md gap-4">
           {recentActivities.length === 0 ? (
@@ -128,7 +124,7 @@ const WalletPage = ({ balance, recentActivities }) => {
             recentActivities.map((activity) => (
               <div
                 key={activity.id}
-                className="flex items-center justify-between bg-white rounded-xl shadow-xs border border-gray-200 p-4"
+                className="flex items-center justify-between bg-white rounded-xl shadow-sm border border-gray-200 p-4"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-600">
