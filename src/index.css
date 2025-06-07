@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'PP Sans';
+  src: url('/Font/Sans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import "tailwindcss";
+
+/* :root {
+  font-family: 'PP Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: 'PP Sans', system-ui, Avenir, Helvetica, Arial, sans-serif; */
+}
